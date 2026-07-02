@@ -20,10 +20,11 @@ Aprender a invertir genera parálisis por análisis debido a la cantidad de tér
 * **Duración:** 60 minutos (45m teoría/demo + 15m preguntas).
 * **Analogía:** *Limpiar la casa y el extintor de incendios.* No podés comprar muebles si hay goteras en el techo (deudas) o si no tenés un extintor en la cocina (fondo de emergencia).
 * **Temas a cubrir:**
-  - **Limpieza de deudas:** Diferencia entre deuda mala (tasas altas de tarjetas) y deuda buena.
+  - **Limpieza de deudas (Avalancha vs Bola de Nieve):** Diferencia entre deuda mala (tasas altas de tarjetas) y deuda buena, y las dos estrategias principales para salir de ellas (enfoque matemático vs psicológico).
+  - **Trampas Psicológicas:** Ley de Parkinson (inflación del estilo de vida) y Adaptación Hedónica.
   - **El Fondo de Emergencia:** Cuánto necesitas guardar (de 3 a 6 meses de costos de vida) y por qué es el escudo protector de tus inversiones.
   - **Cuentas de Ahorro de Alto Rendimiento en Perú (TREA):** Dónde poner el fondo de emergencia para ganarle a la inflación sin riesgo (Fondo de Seguro de Depósitos - FSD).
-* **Entregable práctico:** Presupuesto personal calculado con la capacidad de inversión mensual del alumno.
+* **Entregable práctico:** Presupuesto personal calculado con la capacidad de inversión mensual del alumno, integrando el método Kakeibo para el control manual de gastos.
 
 ---
 
@@ -47,6 +48,7 @@ Aprender a invertir genera parálisis por análisis debido a la cantidad de tér
   - **Interés Compuesto:** Cómo funciona la reinversión de ganancias a lo largo de 10, 20 y 30 años.
   - **ETFs Acumulativos vs. Distributivos:** La ventaja de los ETFs UCITS (Irlanda) como VUAA o CNDX frente a los de EE. UU. (SPY) para evitar la retención del 30% de dividendos.
   - **Impuestos en Perú:** Renta de Fuente Extranjera (escala progresiva de SUNAT del 8% al 30% usando brókers como XTB) vs. Renta de Fuente Peruana (tasa fija del 5% usando SABs locales o CAVALI).
+  - **El Objetivo Final (Movimiento FIRE):** Qué es la Regla del 4% y cómo calcular el número de tu independencia financiera.
 * **Entregable práctico:** Simulación interactiva con calculadora de interés compuesto proyectando el impacto de la retención de impuestos.
 
 ---
@@ -73,3 +75,14 @@ Aprender a invertir genera parálisis por análisis debido a la cantidad de tér
   - **Fracciones de acciones:** Cómo empezar a invertir con montos pequeños (desde $5).
   - **Psicología del inversor:** Qué hacer cuando tu portafolio se ponga en rojo al día siguiente (la trampa de la impaciencia y las emociones).
 * **Entregable práctico:** Ejecución exitosa de la primera compra de una fracción de ETF o acción por parte de los alumnos que tengan su cuenta fondeada.
+
+---
+
+### 🚀 Clase 6 (Bonus): Multiplicación de Ingresos y Creación de Valor
+* **Objetivo:** Entender que el límite de reducción de gastos es cero, pero el de generación de ingresos es infinito.
+* **Duración:** 45 minutos.
+* **Analogía:** *El motor principal.* Si las inversiones son la velocidad a la que viaja tu dinero, tus ingresos activos son el motor. Sin un motor potente, la velocidad máxima (interés compuesto) no importa.
+* **Temas a cubrir (basado en Brian Tracy):**
+  - **Vender antes de crear:** Reducción de riesgos al validar ideas en el mercado.
+  - **Habilidades de alto valor:** Comunicación, ventas, y resolución de problemas.
+  - **Separar tiempo y dinero:** El puente hacia la verdadera libertad financiera.

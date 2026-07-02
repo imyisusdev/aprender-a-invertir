@@ -116,10 +116,10 @@
        */
       .card {
         background: white;
-        border: 2px solid #e5e7eb;
+        border: 2px solid #000;
         border-radius: 12px;
         padding: 22px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        box-shadow: 4px 4px 0px #000;
       }
       .card-interactive {
         transition: all 0.2s ease;
@@ -127,7 +127,7 @@
       }
       .card-interactive:hover {
         border-color: #000;
-        box-shadow: 4px 4px 0px #000;
+        box-shadow: 6px 6px 0px #000;
         transform: translate(-2px, -2px);
       }
       .card-red {
@@ -139,6 +139,11 @@
         background: var(--green-light);
         border-color: var(--green);
         box-shadow: 4px 4px 0 var(--green);
+      }
+      .card-blue {
+        background: #eff6ff;
+        border-color: #3b82f6;
+        box-shadow: 4px 4px 0 #3b82f6;
       }
 
       /* ─── STEP NUMBER ────────────────────────────────────────── */
@@ -398,7 +403,7 @@
 
             <div class="w-12 h-1 bg-black rounded mt-2"></div>
 
-            <p class="text-gray-500 text-lg text-center mt-2 max-w-md">
+            <p class="text-gray-700 text-lg text-center mt-2 max-w-md">
               El suelo firme que necesitás antes de entrar a la bolsa de
               valores.
             </p>
@@ -446,7 +451,7 @@
                   </div>
                   <div>
                     <h3
-                      class="text-2xl font-black text-red-600 mb-0"
+                      class="text-2xl font-black text-red-600 !mb-0"
                       style="letter-spacing: -0.5px"
                     >
                       OTAR
@@ -506,7 +511,7 @@
                   </div>
                   <div>
                     <h3
-                      class="text-2xl font-black text-green-600 mb-0"
+                      class="text-2xl font-black text-green-600 !mb-0"
                       style="letter-spacing: -0.5px"
                     >
                       YISUS
@@ -553,6 +558,154 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             4.6 LA TRAMPA PSICOLÓGICA
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#f9fafb">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">MINDSET FINANCIERO</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                La Trampa Psicológica
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                "Cuando gane más, voy a ahorrar más". Mentira.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5 flex-1">
+              <div class="card flex flex-col justify-center">
+                <h4 class="text-lg font-black mb-2 text-center">
+                  <i class="fas fa-expand-arrows-alt text-purple-600 mr-2"></i>
+                  Ley de Parkinson
+                </h4>
+                <p
+                  class="text-sm text-gray-800 text-center leading-relaxed px-4"
+                >
+                  <em
+                    >"Los gastos se expanden hasta cubrir la totalidad de los
+                    ingresos."</em
+                  ><br /><br />
+                  Si te suben el sueldo y no tenés un sistema, automáticamente
+                  gastás en restaurantes más caros o un auto mejor (inflación
+                  del estilo de vida).
+                </p>
+              </div>
+
+              <div class="card flex flex-col justify-center">
+                <h4 class="text-lg font-black mb-2 text-center">
+                  <i class="fas fa-face-smile-beam text-orange-500 mr-2"></i>
+                  Adaptación Hedónica
+                </h4>
+                <p
+                  class="text-sm text-gray-800 text-center leading-relaxed px-4"
+                >
+                  La felicidad por comprar cosas materiales dura muy poco
+                  (semanas). Tu cerebro normaliza tu nuevo nivel de consumo y te
+                  pide cosas más caras para sentir lo mismo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             5. TU TORTA MENSUAL 50/30/20
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#ffffff">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">REGLA DEL 50/30/20</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                Tu Torta Mensual
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                Ejemplo con S/ 2,000. Si no dividís las porciones
+                <em>antes</em> de la fiesta, te quedás con hambre.
+              </p>
+            </div>
+
+            <!-- UX: cards informativos sin hover — no son clickeables -->
+            <div class="grid grid-cols-3 gap-4 flex-1">
+              <div class="card flex flex-col items-center text-center gap-2">
+                <div class="pct-big text-black">50%</div>
+                <div
+                  class="text-sm font-mono font-bold bg-gray-100 px-2 py-1 rounded"
+                >
+                  S/ 1,000
+                </div>
+                <h4
+                  class="text-sm font-black uppercase border-b-2 border-black pb-2 w-full text-center tracking-wide mt-1"
+                >
+                  Gastos Fijos
+                </h4>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Alquiler, servicios, alimentación básica. Todo lo
+                  indispensable para vivir.
+                </p>
+                <div class="text-xl text-gray-300 mt-auto">
+                  <i class="fas fa-house mr-1"></i
+                  ><i class="fas fa-bolt mr-1"></i
+                  ><i class="fas fa-utensils"></i>
+                </div>
+              </div>
+
+              <div class="card flex flex-col items-center text-center gap-2">
+                <div class="pct-big text-gray-400">30%</div>
+                <div
+                  class="text-sm font-mono font-bold bg-gray-100 px-2 py-1 rounded text-gray-600"
+                >
+                  S/ 600
+                </div>
+                <h4
+                  class="text-sm font-black uppercase border-b-2 border-gray-300 pb-2 w-full text-center tracking-wide text-gray-600 mt-1"
+                >
+                  Gastos Variables
+                </h4>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Salidas, ropa, hobbies. Lo que hace tu vida agradable con
+                  límite.
+                </p>
+                <div class="text-xl text-gray-300 mt-auto">
+                  <i class="fas fa-shirt mr-1"></i
+                  ><i class="fas fa-pizza-slice mr-1"></i
+                  ><i class="fas fa-film"></i>
+                </div>
+              </div>
+
+              <div
+                class="card card-green flex flex-col items-center text-center gap-2"
+                style="border-radius: 12px"
+              >
+                <div class="pct-big text-green-600">20%</div>
+                <div
+                  class="text-sm font-mono font-bold bg-green-100 px-2 py-1 rounded text-green-700"
+                >
+                  S/ 400
+                </div>
+                <h4
+                  class="text-sm font-black uppercase border-b-2 border-green-500 pb-2 w-full text-center tracking-wide text-green-700 mt-1"
+                >
+                  Ahorro & Inversión
+                </h4>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  <strong>No se negocia</strong>. Se desvía automáticamente el
+                  día que cobrás.
+                </p>
+                <div class="text-xl text-green-400 mt-auto">
+                  <i class="fas fa-piggy-bank"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-xs text-gray-400 text-center font-mono mt-2">
+              *TIP: Si sos joven y vivís con tus padres, sé agresivo. Invertí la
+              regla: 20% fijos, 30% variables,
+              <strong class="text-gray-500">50% ahorro e inversión</strong>.
             </div>
           </div>
         </section>
@@ -621,18 +774,18 @@
         </section>
 
         <!-- ═══════════════════════════════════════════════════
-             4. ARREGLANDO LAS GOTERAS
+             4. LA MOCHILA DE PIEDRAS
         ════════════════════════════════════════════════════════ -->
         <section data-background-color="#f9fafb">
           <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
             <div>
-              <div class="badge">LAS GOTERAS DEL PRESUPUESTO</div>
+              <div class="badge">EL COSTO DE LA DEUDA</div>
               <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
-                Arreglando las goteras
+                La mochila de piedras
               </h2>
-              <p class="text-gray-500 text-base mt-1">
-                Las deudas de consumo son como caminar con una mochila llena de
-                piedras todo el mes.
+              <p class="text-gray-700 text-base mt-1">
+                Las deudas de consumo son como caminar todo el mes cargando
+                piedras. Te frenan y no te dejan avanzar.
               </p>
             </div>
 
@@ -655,7 +808,7 @@
                   S/ 100 de cuota = S/ 40–50 de regalo al banco
                 </div>
               </div>
-              <div class="card card-green" style="border-radius: 12px">
+              <div class="card card-green">
                 <div
                   class="text-xs font-bold font-mono text-green-600 uppercase mb-2 tracking-wider"
                 >
@@ -667,12 +820,12 @@
                   El S&P 500 promedia un
                   <strong class="text-green-600">~10% anual</strong> histórico.
                   No tiene ningún sentido buscar ganar 10% mientras perdés 40%
-                  del otro lado.
+                  del otro lado por el peso de la mochila.
                 </p>
                 <div
                   class="bg-green-100 border-2 border-green-500 rounded-lg p-3 text-center font-mono text-sm font-bold text-green-700"
                 >
-                  Primero cerrá las fugas, luego llenás el balde.
+                  Primero sacate las piedras, luego empezá a correr.
                 </div>
               </div>
             </div>
@@ -680,76 +833,77 @@
         </section>
 
         <!-- ═══════════════════════════════════════════════════
-             5. TU TORTA MENSUAL 50/30/20
+             4.5 ESTRATEGIAS DE PAGO (Avalancha vs Bola de Nieve)
         ════════════════════════════════════════════════════════ -->
         <section data-background-color="#ffffff">
           <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
             <div>
-              <div class="badge">REGLA DEL 50/30/20</div>
+              <div class="badge">ESTRATEGIAS DE PAGO</div>
               <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
-                Tu Torta Mensual
+                ¿Cómo apago el fuego?
               </h2>
               <p class="text-gray-500 text-base mt-1">
-                Si no dividís las porciones <em>antes</em> de la fiesta, te
-                quedás con hambre a fin de mes.
+                Dos caminos para salir de las deudas. Elegí el que mejor vaya
+                con tu mente.
               </p>
             </div>
 
-            <!-- UX: cards informativos sin hover — no son clickeables -->
-            <div class="grid grid-cols-3 gap-4 flex-1">
-              <div class="card flex flex-col items-center text-center gap-3">
-                <div class="pct-big text-black">50%</div>
-                <h4
-                  class="text-sm font-black uppercase border-b-2 border-black pb-2 w-full text-center tracking-wide"
-                >
-                  Gastos Fijos
-                </h4>
-                <p class="text-sm text-gray-500 leading-relaxed">
-                  Alquiler, servicios, alimentación básica, salud. Todo lo
-                  indispensable para funcionar día a día.
-                </p>
-                <div class="text-xl text-gray-300 mt-auto">
-                  <i class="fas fa-house mr-1"></i
-                  ><i class="fas fa-bolt mr-1"></i
-                  ><i class="fas fa-utensils"></i>
+            <div class="grid grid-cols-2 gap-5">
+              <div class="card card-blue" style="border-radius: 12px">
+                <div class="flex items-center gap-3 mb-3">
+                  <i class="fas fa-mountain text-3xl text-blue-600"></i>
+                  <h4 class="text-xl font-black text-blue-700">
+                    Método Avalancha
+                  </h4>
                 </div>
+                <div
+                  class="text-xs font-bold font-mono text-blue-500 uppercase mb-2"
+                >
+                  Enfoque Matemático
+                </div>
+                <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                  Pagá primero la deuda con la
+                  <strong>tasa de interés más alta</strong> (ej. tarjeta de
+                  crédito).
+                </p>
+                <ul class="text-sm text-gray-600 flex flex-col gap-2">
+                  <li>
+                    <i class="fas fa-check text-green-500 mr-2"></i>Ahorrás más
+                    dinero a largo plazo.
+                  </li>
+                  <li>
+                    <i class="fas fa-xmark text-red-500 mr-2"></i>Requiere mucha
+                    disciplina para ver el progreso.
+                  </li>
+                </ul>
               </div>
 
-              <div class="card flex flex-col items-center text-center gap-3">
-                <div class="pct-big text-gray-400">30%</div>
-                <h4
-                  class="text-sm font-black uppercase border-b-2 border-gray-300 pb-2 w-full text-center tracking-wide text-gray-600"
-                >
-                  Gastos Variables
-                </h4>
-                <p class="text-sm text-gray-500 leading-relaxed">
-                  Salidas, comida a domicilio, ropa, hobbies. Lo que hace tu
-                  vida agradable — con límite claro.
-                </p>
-                <div class="text-xl text-gray-300 mt-auto">
-                  <i class="fas fa-shirt mr-1"></i
-                  ><i class="fas fa-pizza-slice mr-1"></i
-                  ><i class="fas fa-film"></i>
+              <div class="card card-green" style="border-radius: 12px">
+                <div class="flex items-center gap-3 mb-3">
+                  <i class="fas fa-snowflake text-3xl text-green-600"></i>
+                  <h4 class="text-xl font-black text-green-700">
+                    Bola de Nieve
+                  </h4>
                 </div>
-              </div>
-
-              <div
-                class="card card-green flex flex-col items-center text-center gap-3"
-                style="border-radius: 12px"
-              >
-                <div class="pct-big text-green-600">20%</div>
-                <h4
-                  class="text-sm font-black uppercase border-b-2 border-green-500 pb-2 w-full text-center tracking-wide text-green-700"
+                <div
+                  class="text-xs font-bold font-mono text-green-600 uppercase mb-2"
                 >
-                  Ahorro & Inversión
-                </h4>
-                <p class="text-sm text-gray-600 leading-relaxed">
-                  Este porcentaje <strong>no se negocia</strong>. Se desvía
-                  automáticamente el día que cobrás, antes de gastar nada.
-                </p>
-                <div class="text-xl text-green-400 mt-auto">
-                  <i class="fas fa-piggy-bank"></i>
+                  Enfoque Psicológico
                 </div>
+                <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                  Pagá primero la deuda con el
+                  <strong>saldo más pequeño</strong>, sin importar la tasa.
+                </p>
+                <ul class="text-sm text-gray-600 flex flex-col gap-2">
+                  <li>
+                    <i class="fas fa-check text-green-500 mr-2"></i>Victorias
+                    rápidas te motivan a seguir.
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-green-500 mr-2"></i>Liberás
+                    flujo de caja más pronto.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -874,20 +1028,20 @@
               <div class="card flex flex-col items-center justify-center">
                 <div class="bar-chart-wrap mb-3">
                   <div class="bar-col">
-                    <div class="bar bg-red-300" style="height: 120px">
-                      <span class="bar-val text-red-600">S/ 7,339</span>
+                    <div class="bar bg-red-300" style="height: 130px">
+                      <span class="bar-val text-red-600">S/ 8,626</span>
                     </div>
                     <span class="bar-label text-gray-600">Bajo el colchón</span>
                   </div>
                   <div class="bar-col">
-                    <div class="bar bg-green-400" style="height: 200px">
-                      <span class="bar-val text-green-700">S/ 13,382</span>
+                    <div class="bar bg-green-400" style="height: 190px">
+                      <span class="bar-val text-green-700">S/ 12,762</span>
                     </div>
-                    <span class="bar-label text-gray-600">Cuenta TREA 6%</span>
+                    <span class="bar-label text-gray-600">Cuenta TREA ~5%</span>
                   </div>
                 </div>
                 <p class="text-xs text-gray-400 font-mono text-center mt-2">
-                  *Colchón ajustado por inflación (~6% anual). TREA muestra
+                  *Colchón ajustado por inflación meta (~3% anual). TREA muestra
                   valor nominal.
                 </p>
               </div>
@@ -902,7 +1056,7 @@
                   </h4>
                   <p class="text-sm text-gray-700 leading-relaxed">
                     La inflación es el goteo constante. S/ 10,000 quietos
-                    durante 5 años valen solo <strong>S/ 7,339</strong> en poder
+                    durante 5 años valen solo <strong>S/ 8,626</strong> en poder
                     de compra real.
                   </p>
                 </div>
@@ -913,9 +1067,9 @@
                     <i class="fas fa-piggy-bank"></i> El ahorro inteligente
                   </h4>
                   <p class="text-sm text-gray-700 leading-relaxed">
-                    Una cuenta con TREA 6% hace crecer tus S/ 10,000 a
-                    <strong>S/ 13,382</strong>. La diferencia de
-                    <strong>S/ 6,043</strong> que ganás o perdés solo por elegir
+                    Una cuenta con TREA 5% hace crecer tus S/ 10,000 a
+                    <strong>S/ 12,762</strong>. La diferencia de
+                    <strong>S/ 4,136</strong> que ganás o perdés solo por elegir
                     dónde guardar tu plata.
                   </p>
                 </div>
@@ -995,6 +1149,24 @@
                   <i class="fas fa-list-check"></i> Qué buscar
                 </h4>
                 <div class="flex flex-col gap-3 mb-4">
+                  <!-- Explicación clave sobre la TREA vs TEA -->
+                  <div
+                    class="bg-green-100 border-2 border-green-400 rounded p-3 mb-2"
+                  >
+                    <p
+                      class="text-xs font-bold text-green-800 mb-1 flex items-center gap-1"
+                    >
+                      <i class="fas fa-circle-info"></i> ¿Qué es la TREA?
+                    </p>
+                    <p class="text-xs text-green-700 leading-relaxed">
+                      <strong>Tasa de Rendimiento Efectivo Anual.</strong> A
+                      diferencia de la TEA (Tasa Efectiva Anual), la TREA ya te
+                      resta los costos de mantenimiento y comisiones.
+                      <strong
+                        >Es lo que realmente te llevás al bolsillo.</strong
+                      >
+                    </p>
+                  </div>
                   <div class="icon-bullet">
                     <i
                       class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
@@ -1129,7 +1301,7 @@
                 <div class="h-px bg-green-200"></div>
 
                 <div class="flex items-center gap-4">
-                  <div class="step-num">2</div>∂
+                  <div class="step-num">2</div>
                   <div>
                     <p class="font-bold text-base leading-snug">
                       <strong>Calculá tu fondo de emergencia:</strong>
