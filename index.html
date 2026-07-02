@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aprende a Invertir desde Cero - imyisusdev</title>
+    <meta
+      name="description"
+      content="Curso gratuito de inversión en bolsa desde cero con imyisusdev. Aprende a invertir en el S&P 500, ETFs y Nasdaq 100 con un enfoque práctico para peruanos."
+    />
+    <meta
+      name="keywords"
+      content="invertir desde cero, ETF, S&P 500, XTB, Peru, inversión bolsa, imyisusdev, SUNAT, interés compuesto, Nasdaq"
+    />
+    <meta name="author" content="imyisusdev" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://imyisusdev.github.io/aprender-a-invertir/" />
+    <meta property="og:title" content="Aprende a Invertir desde Cero - imyisusdev" />
+    <meta property="og:description" content="Aprende a invertir en bolsa paso a paso, desde el fondo de emergencia hasta tu primera compra real de ETFs." />
+    <meta property="og:image" content="https://imyisusdev.github.io/aprender-a-invertir/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://imyisusdev.github.io/aprender-a-invertir/" />
+    <meta name="twitter:title" content="Aprende a Invertir desde Cero - imyisusdev" />
+    <meta name="twitter:description" content="Aprende a invertir en bolsa paso a paso, desde el fondo de emergencia hasta tu primera compra real de ETFs." />
+    <meta name="twitter:image" content="https://imyisusdev.github.io/aprender-a-invertir/og-image.png" />
+
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/188985435?v=4" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Fira+Code:wght@400;700&display=swap');
+
+      body {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        background-color: #fafafa;
+        color: #1a1a1a;
+      }
+
+      .neo-card {
+        background: #ffffff;
+        border: 3px solid #000000;
+        box-shadow: 6px 6px 0px #000000;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .neo-card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 10px 10px 0px #000000;
+      }
+
+      .neo-card-green {
+        background: #ffffff;
+        border: 3px solid #000000;
+        box-shadow: 6px 6px 0px #16a34a;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .neo-card-green:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 10px 10px 0px #16a34a;
+      }
+
+      /* Ticker animado */
+      .ticker-wrap {
+        overflow: hidden;
+        border-top: 3px solid #000;
+        border-bottom: 3px solid #000;
+        background: #000;
+      }
+
+      .ticker-track {
+        display: flex;
+        width: max-content;
+        animation: ticker 30s linear infinite;
+      }
+
+      .ticker-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes ticker {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .ticker-item {
+        white-space: nowrap;
+        padding: 10px 32px;
+        font-family: 'Fira Code', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .ticker-up { color: #4ade80; }
+      .ticker-separator { color: #555; }
+
+      /* Hero accent */
+      .hero-accent {
+        background: #000;
+        color: #fff;
+        padding: 2px 10px;
+        display: inline-block;
+        transform: rotate(-1deg);
+      }
+
+      .hero-accent-green {
+        background: #16a34a;
+        color: #fff;
+        padding: 2px 10px;
+        display: inline-block;
+        transform: rotate(0.5deg);
+      }
+
+      /* Progress bar steps */
+      .step-number {
+        width: 48px;
+        height: 48px;
+        border: 3px solid #000;
+        box-shadow: 3px 3px 0 #000;
+        font-weight: 900;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      /* Coming soon card */
+      .neo-card-disabled {
+        background: #f9f9f9;
+        border: 3px solid #d1d5db;
+        box-shadow: 6px 6px 0px #d1d5db;
+        opacity: 0.75;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .neo-card-disabled:hover {
+        opacity: 0.85;
+      }
+
+      /* Diagonal number badge */
+      .badge-number {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 14px;
+        transform: translate(8px, -8px) rotate(45deg);
+      }
+
+      .badge-number-inner {
+        transform: rotate(-45deg);
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen flex flex-col justify-between py-12 px-6">
+    <div class="max-w-4xl mx-auto w-full">
+
+      <!-- TICKER ANIMADO (antes del header) -->
+      <div class="ticker-wrap mb-10 rounded-lg overflow-hidden" style="border: 3px solid #000; box-shadow: 4px 4px 0 #000;">
+        <div class="ticker-track">
+          <!-- bloque A -->
+          <span class="ticker-item"><i class="fas fa-chart-line ticker-up"></i> S&P 500</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-chart-bar ticker-up"></i> NASDAQ 100</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-seedling ticker-up"></i> ETF · SPY</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-seedling ticker-up"></i> ETF · CNDX</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-seedling ticker-up"></i> ETF · VUAA</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-snowflake" style="color:#93c5fd"></i> Interés Compuesto</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-shield-halved" style="color:#fbbf24"></i> Fondo de Emergencia</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-flag" style="color:#4ade80"></i> Inversión para Perú</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-scale-balanced" style="color:#f87171"></i> SUNAT · Renta de Fuente Extranjera</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-landmark" style="color:#c4b5fd"></i> XTB · Hapi · SABs Locales</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <!-- bloque B (duplicado para el loop continuo) -->
+          <span class="ticker-item"><i class="fas fa-chart-line ticker-up"></i> S&P 500</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-chart-bar ticker-up"></i> NASDAQ 100</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-seedling ticker-up"></i> ETF · SPY</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-seedling ticker-up"></i> ETF · CNDX</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-seedling ticker-up"></i> ETF · VUAA</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-snowflake" style="color:#93c5fd"></i> Interés Compuesto</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-shield-halved" style="color:#fbbf24"></i> Fondo de Emergencia</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-flag" style="color:#4ade80"></i> Inversión para Perú</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-scale-balanced" style="color:#f87171"></i> SUNAT · Renta de Fuente Extranjera</span>
+          <span class="ticker-item ticker-separator">·</span>
+          <span class="ticker-item"><i class="fas fa-landmark" style="color:#c4b5fd"></i> XTB · Hapi · SABs Locales</span>
+          <span class="ticker-item ticker-separator">·</span>
+        </div>
+      </div>
+
+      <!-- HEADER -->
+      <header class="text-center mb-12">
+        <div class="inline-block relative mb-6">
+          <img
+            src="https://avatars.githubusercontent.com/u/188985435?v=4"
+            alt="Logo imyisusdev"
+            class="w-28 h-28 rounded-full border-4 border-black shadow-[6px_6px_0px_#000000] hover:scale-105 transition-transform duration-300 mx-auto"
+          />
+        </div>
+
+        <!-- Redes del Canal -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <a href="https://linktr.ee/imyisusdev" target="_blank" title="Linktree"
+            class="w-10 h-10 bg-emerald-400 border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fas fa-tree text-lg"></i>
+          </a>
+          <a href="https://github.com/imyisusdev" target="_blank" title="GitHub"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-github text-lg"></i>
+          </a>
+          <a href="https://youtube.com/@imyisusdev" target="_blank" title="YouTube"
+            class="w-10 h-10 bg-red-500 border-2 border-black rounded flex items-center justify-center text-white shadow-[3px_3px_0px_#000] hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-youtube text-lg"></i>
+          </a>
+          <a href="https://instagram.com/imyisusdev" target="_blank" title="Instagram"
+            class="w-10 h-10 bg-pink-500 border-2 border-black rounded flex items-center justify-center text-white shadow-[3px_3px_0px_#000] hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-instagram text-lg"></i>
+          </a>
+          <a href="https://tiktok.com/@imyisusdev" target="_blank" title="TikTok"
+            class="w-10 h-10 bg-black border-2 border-white rounded flex items-center justify-center text-white shadow-[3px_3px_0px_#000] hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-tiktok text-lg"></i>
+          </a>
+          <a href="https://threads.net/@imyisusdev" target="_blank" title="Threads"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-threads text-lg"></i>
+          </a>
+          <a href="https://facebook.com/imyisusdev" target="_blank" title="Facebook"
+            class="w-10 h-10 bg-blue-600 border-2 border-black rounded flex items-center justify-center text-white shadow-[3px_3px_0px_#000] hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-facebook-f text-lg"></i>
+          </a>
+        </div>
+
+        <h1 class="text-5xl font-black uppercase tracking-tight mb-4 leading-tight">
+          Aprende a
+          <span class="hero-accent-green">Invertir</span>
+          <br />
+          <span class="hero-accent">desde Cero</span>
+        </h1>
+        <p class="text-xl text-gray-600 font-medium max-w-lg mx-auto mt-4">
+          Sin jerga de Wall Street. Sin vendehumos. Un camino claro y honesto para poner tu plata a trabajar.
+        </p>
+
+        <!-- Badges de contexto -->
+        <div class="flex flex-wrap justify-center gap-3 mt-6">
+          <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full border border-green-400">
+            <i class="fas fa-flag mr-1"></i> Enfoque Perú
+          </span>
+          <span class="bg-black text-white text-xs font-bold px-3 py-1.5 rounded-full border border-black">
+            <i class="fas fa-users mr-1"></i> Para principiantes
+          </span>
+          <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1.5 rounded-full border border-yellow-400">
+            <i class="fas fa-star mr-1"></i> 100% gratis
+          </span>
+        </div>
+      </header>
+
+      <!-- ADVERTENCIA EDUCATIVA -->
+      <div class="mb-12 p-4 border-2 border-dashed border-gray-400 bg-yellow-50 rounded-lg flex items-start gap-3">
+        <i class="fas fa-triangle-exclamation text-yellow-600 mt-0.5 flex-shrink-0"></i>
+        <p class="text-sm text-gray-600">
+          <strong class="text-gray-900">Aviso importante:</strong> Este curso es de carácter educativo. No constituye asesoría financiera ni tributaria profesional. Siempre consultá con un contador habilitado antes de tomar decisiones fiscales.
+        </p>
+      </div>
+
+      <!-- GRID DE CLASES -->
+      <main class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+
+        <!-- Clase 1 -->
+        <article class="neo-card p-6 flex flex-col justify-between relative overflow-hidden group">
+          <div class="badge-number bg-green-400 text-black">
+            <span class="badge-number-inner">1</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-400">PRÓXIMAMENTE</span>
+              <span class="font-mono text-xs text-gray-500">Clase 1</span>
+            </div>
+            <div class="text-3xl mb-3">🧹</div>
+            <h2 class="text-2xl font-black mb-3">Del Caos al Ahorro Activo</h2>
+            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+              Antes de invertir, hay que limpiar la casa. Aprende a liquidar deudas caras, construir tu fondo de emergencia y abrir cuentas de ahorro de alto rendimiento (TREA) en Perú.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Presupuesto</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Fondo de Emergencia</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">TREA</span>
+            </div>
+          </div>
+          <div class="mt-auto pt-4 border-t-2 border-dashed border-gray-200 flex gap-3">
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fas fa-lock"></i> Materiales
+            </span>
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fab fa-youtube"></i> Grabación
+            </span>
+          </div>
+        </article>
+
+        <!-- Clase 2 -->
+        <article class="neo-card p-6 flex flex-col justify-between relative overflow-hidden group">
+          <div class="badge-number bg-green-400 text-black">
+            <span class="badge-number-inner">2</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-400">PRÓXIMAMENTE</span>
+              <span class="font-mono text-xs text-gray-500">Clase 2</span>
+            </div>
+            <div class="text-3xl mb-3">📦</div>
+            <h2 class="text-2xl font-black mb-3">El Menú de Inversiones</h2>
+            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+              Fondos mutuos del banco vs. acciones individuales vs. ETFs. Descubre por qué los fondos bancarios te cobran entre el 1.5% y el 3% anual y cómo los ETFs son la canasta completa.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Fondos Mutuos</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Acciones</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">ETFs</span>
+            </div>
+          </div>
+          <div class="mt-auto pt-4 border-t-2 border-dashed border-gray-200 flex gap-3">
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fas fa-lock"></i> Materiales
+            </span>
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fab fa-youtube"></i> Grabación
+            </span>
+          </div>
+        </article>
+
+        <!-- Clase 3 -->
+        <article class="neo-card p-6 flex flex-col justify-between relative overflow-hidden group">
+          <div class="badge-number bg-green-400 text-black">
+            <span class="badge-number-inner">3</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-400">PRÓXIMAMENTE</span>
+              <span class="font-mono text-xs text-gray-500">Clase 3</span>
+            </div>
+            <div class="text-3xl mb-3">❄️</div>
+            <h2 class="text-2xl font-black mb-3">La Bola de Nieve y los Impuestos</h2>
+            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+              El interés compuesto crece solo, como una bola de nieve en pendiente. Pero hay que cruzar la aduana (SUNAT). Aprende a elegir ETFs de Irlanda para pagar menos impuestos.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Interés Compuesto</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">UCITS</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">SUNAT</span>
+            </div>
+          </div>
+          <div class="mt-auto pt-4 border-t-2 border-dashed border-gray-200 flex gap-3">
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fas fa-lock"></i> Materiales
+            </span>
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fab fa-youtube"></i> Grabación
+            </span>
+          </div>
+        </article>
+
+        <!-- Clase 4 -->
+        <article class="neo-card p-6 flex flex-col justify-between relative overflow-hidden group">
+          <div class="badge-number bg-green-400 text-black">
+            <span class="badge-number-inner">4</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-400">PRÓXIMAMENTE</span>
+              <span class="font-mono text-xs text-gray-500">Clase 4</span>
+            </div>
+            <div class="text-3xl mb-3">🔌</div>
+            <h2 class="text-2xl font-black mb-3">Eligiendo el Bróker Correcto</h2>
+            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+              SABs locales vs. brókers internacionales (XTB, Hapi, IBKR). Analizamos comisiones ocultas, el spread del tipo de cambio, los métodos de depósito desde bancos peruanos y el W-8BEN.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">XTB</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">SABs</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">W-8BEN</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Hapi</span>
+            </div>
+          </div>
+          <div class="mt-auto pt-4 border-t-2 border-dashed border-gray-200 flex gap-3">
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fas fa-lock"></i> Materiales
+            </span>
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fab fa-youtube"></i> Grabación
+            </span>
+          </div>
+        </article>
+
+        <!-- Clase 5 (ancho completo) -->
+        <article class="neo-card-green p-6 flex flex-col justify-between relative overflow-hidden group md:col-span-2">
+          <div class="badge-number bg-black text-white">
+            <span class="badge-number-inner">5</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-400">PRÓXIMAMENTE</span>
+              <span class="font-mono text-xs text-gray-500">Clase 5 · Taller Final</span>
+              <span class="bg-black text-white text-xs font-bold px-2.5 py-1 rounded-full border border-black">
+                <i class="fas fa-star mr-1"></i> PRÁCTICA REAL
+              </span>
+            </div>
+            <div class="text-3xl mb-3">🎯</div>
+            <h2 class="text-2xl font-black mb-3">Tu Primera Compra Real en Vivo</h2>
+            <p class="text-gray-600 mb-4 text-sm leading-relaxed max-w-2xl">
+              Podés leer el manual del auto mil veces, pero hasta que no soltás el embrague no sabés manejar. Ejecutamos la primera compra real de una fracción de ETF en vivo en XTB o Hapi, y cerramos con psicología del inversor para no entrar en pánico cuando el portafolio se ponga en rojo.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Orden de Mercado</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Orden Límite</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Fracciones</span>
+              <span class="bg-gray-100 text-gray-700 text-xs font-mono px-2 py-1 rounded border border-gray-300">Psicología del Inversor</span>
+            </div>
+          </div>
+          <div class="mt-auto pt-4 border-t-2 border-dashed border-gray-200 flex gap-3 max-w-sm">
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fas fa-lock"></i> Materiales
+            </span>
+            <span class="flex-1 bg-gray-100 text-gray-400 border-2 border-gray-300 py-2 text-center rounded font-bold text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
+              <i class="fab fa-youtube"></i> Grabación
+            </span>
+          </div>
+        </article>
+
+      </main>
+
+      <!-- SECCIÓN ¿POR QUÉ? -->
+      <section class="neo-card p-6 bg-white mb-16">
+        <h3 class="text-2xl font-black mb-4 flex items-center gap-2">
+          <i class="fas fa-graduation-cap"></i> ¿Por qué este curso?
+        </h3>
+        <p class="text-gray-600 text-sm leading-relaxed mb-6">
+          La mayoría de cursos de inversión están pensados para EE. UU. o Europa. Este fue diseñado desde cero pensando en el contexto real de Perú: con las reglas de SUNAT, los brókers disponibles, el tipo de cambio y las opciones de ahorro locales.
+        </p>
+        <div class="flex flex-wrap gap-4 text-xs font-mono text-gray-600">
+          <span class="bg-gray-100 px-3 py-1.5 rounded border border-gray-300">
+            <i class="fas fa-check text-green-600 mr-1"></i> Sin vendehumos
+          </span>
+          <span class="bg-gray-100 px-3 py-1.5 rounded border border-gray-300">
+            <i class="fas fa-check text-green-600 mr-1"></i> Contexto peruano
+          </span>
+          <span class="bg-gray-100 px-3 py-1.5 rounded border border-gray-300">
+            <i class="fas fa-check text-green-600 mr-1"></i> De 0 a primera compra
+          </span>
+          <span class="bg-gray-100 px-3 py-1.5 rounded border border-gray-300">
+            <i class="fas fa-check text-green-600 mr-1"></i> Totalmente gratis
+          </span>
+        </div>
+      </section>
+
+      <!-- CTA: También hay clases de programación -->
+      <section class="neo-card p-6 bg-black text-white mb-16">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <p class="font-mono text-xs text-gray-400 mb-1">¿También te interesa el código?</p>
+            <h3 class="text-xl font-black">Clases de Programación →</h3>
+            <p class="text-gray-400 text-sm mt-1">HTML, CSS, JavaScript y lógica desde cero con imyisusdev.</p>
+          </div>
+          <a
+            href="https://imyisusdev.github.io/clases/"
+            target="_blank"
+            class="flex-shrink-0 bg-white text-black border-2 border-white px-5 py-2 font-bold rounded hover:bg-gray-200 transition-all shadow-[3px_3px_0px_rgba(255,255,255,0.3)] text-sm flex items-center gap-2"
+          >
+            <i class="fas fa-code"></i> Ver clases
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="text-center border-t-3 border-black pt-8 max-w-4xl mx-auto w-full">
+      <div class="flex justify-between items-center flex-col sm:flex-row gap-4">
+        <p class="font-mono text-sm text-gray-500">
+          Creado con pasión por <strong class="text-black">imyisusdev</strong>
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://linktr.ee/imyisusdev" target="_blank" title="Linktree"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fas fa-tree text-base"></i>
+          </a>
+          <a href="https://github.com/imyisusdev" target="_blank" title="GitHub"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-github text-base"></i>
+          </a>
+          <a href="https://youtube.com/@imyisusdev" target="_blank" title="YouTube"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-youtube text-base"></i>
+          </a>
+          <a href="https://instagram.com/imyisusdev" target="_blank" title="Instagram"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-instagram text-base"></i>
+          </a>
+          <a href="https://tiktok.com/@imyisusdev" target="_blank" title="TikTok"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-tiktok text-base"></i>
+          </a>
+          <a href="https://threads.net/@imyisusdev" target="_blank" title="Threads"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-threads text-base"></i>
+          </a>
+          <a href="https://facebook.com/imyisusdev" target="_blank" title="Facebook"
+            class="w-10 h-10 bg-white border-2 border-black rounded flex items-center justify-center text-black shadow-[3px_3px_0px_#000] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#000] transition-all">
+            <i class="fab fa-facebook-f text-base"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
