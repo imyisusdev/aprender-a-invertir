@@ -1,0 +1,1227 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Del Caos al Ahorro Activo — imyisusdev</title>
+    <link
+      rel="icon"
+      href="https://avatars.githubusercontent.com/u/188985435?v=4"
+    />
+
+    <!-- Reveal.js CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reset.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/white.min.css"
+    />
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      /* ─── DESIGN SYSTEM ─────────────────────────────────────── */
+      .reveal {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        color: #1a1a1a;
+      }
+      :root {
+        --green: #16a34a;
+        --green-light: #f0fdf4;
+        --red: #dc2626;
+        --red-light: #fff5f5;
+      }
+
+      /*
+       * UX RULE: Horizontal padding — content must never touch viewport edges.
+       * At 1280px slide width, 80px padding each side = 1120px effective content area.
+       * This breaks the "stretched" feel and gives slides proper breathing room.
+       */
+      .reveal .slides section {
+        background: transparent;
+        padding-left: 80px !important;
+        padding-right: 80px !important;
+        box-sizing: border-box;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4 {
+        color: #111;
+        font-weight: 800;
+        text-transform: none;
+        letter-spacing: -1px;
+      }
+
+      /*
+       * UX RULE: Link colors — Reveal.js injects a default blue `a` color that
+       * breaks visual consistency. Override globally so ALL links/buttons
+       * inherit their parent color and only show interaction via the element's
+       * own hover styles, not a random browser blue.
+       */
+      .reveal a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .reveal a:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .reveal img {
+        margin: 0;
+      }
+
+      /* ─── BADGE / LABEL ─────────────────────────────────────── */
+      .badge {
+        display: inline-block;
+        background: #111;
+        color: #fff;
+        font-family: monospace;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 4px 12px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+      .badge-green {
+        background: var(--green);
+        color: #fff;
+      }
+
+      /* ─── CARDS ─────────────────────────────────────────────── */
+      /*
+       * UX RULE: Hover only on elements the user can interact with.
+       * Static info cards → no hover (avoids false affordance).
+       * Explicitly add .card-interactive for clickable/selectable cards.
+       */
+      .card {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 22px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .card-interactive {
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+      .card-interactive:hover {
+        border-color: #000;
+        box-shadow: 4px 4px 0px #000;
+        transform: translate(-2px, -2px);
+      }
+      .card-red {
+        background: var(--red-light);
+        border-color: var(--red);
+        box-shadow: 4px 4px 0 var(--red);
+      }
+      .card-green {
+        background: var(--green-light);
+        border-color: var(--green);
+        box-shadow: 4px 4px 0 var(--green);
+      }
+
+      /* ─── STEP NUMBER ────────────────────────────────────────── */
+      .step-num {
+        min-width: 38px;
+        height: 38px;
+        background: var(--green);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: monospace;
+        font-weight: 900;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        box-shadow: 3px 3px 0 #000;
+        flex-shrink: 0;
+      }
+
+      /* ─── CHART BAR ──────────────────────────────────────────── */
+      .bar-chart-wrap {
+        display: flex;
+        align-items: flex-end;
+        gap: 28px;
+        height: 255px;
+        border-bottom: 3px solid #000;
+      }
+      .bar-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .bar {
+        width: 72px;
+        border-radius: 4px 4px 0 0;
+        position: relative;
+      }
+      .bar-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        font-family: monospace;
+        text-align: center;
+      }
+      .bar-val {
+        position: absolute;
+        top: -28px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.85rem;
+        font-weight: 900;
+        font-family: monospace;
+        white-space: nowrap;
+      }
+
+      /* ─── PROCESS ARROW ROW ──────────────────────────────────── */
+      .process-row {
+        display: flex;
+        align-items: center;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .process-step {
+        /* flex: 1; */
+        border: 2px solid #000;
+        padding: 9px 30px;
+        font-weight: 800;
+        font-size: 0.82rem;
+        text-align: center;
+        box-shadow: 3px 3px 0 #000;
+        background: #fff;
+      }
+      .process-step.active {
+        background: #111;
+        color: #fff;
+      }
+      .process-arrow {
+        font-size: 0.9rem;
+        color: #aaa;
+        padding: 0 6px;
+        flex-shrink: 0;
+      }
+
+      /* ─── ACTION BUTTONS (links que sí son interactivos) ─────── */
+      /*
+       * UX RULE: Buttons need clear state changes — resting, hover, active.
+       * Dark border → fill on hover (high contrast, clear affordance).
+       */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        text-decoration: none;
+      }
+      .btn-outline {
+        border: 2px solid #000;
+        background: #fff;
+        color: #000;
+      }
+      .btn-outline:hover {
+        background: #000;
+        color: #fff !important;
+      }
+      .btn-green {
+        border: 2px solid var(--green);
+        background: var(--green);
+        color: #fff !important;
+        font-weight: 800;
+        width: 100%;
+        justify-content: center;
+        padding: 10px 16px;
+      }
+      .btn-green:hover {
+        background: #15803d;
+        border: 2px solid #15803d !important;
+      }
+
+      /* ─── BRANDING OVERLAY ───────────────────────────────────── */
+      #branding-overlay {
+        position: absolute;
+        bottom: 20px;
+        left: 25px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: monospace;
+        pointer-events: none;
+        background: rgba(255, 255, 255, 0.92);
+        padding: 6px 14px;
+        border-radius: 50px;
+        border: 2px solid #000;
+        backdrop-filter: blur(5px);
+        box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.12);
+      }
+      #branding-overlay img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid #000;
+      }
+      #branding-overlay span {
+        color: #000;
+        font-size: 0.82rem;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+      }
+
+      /* ─── AVATAR CIRCLE ──────────────────────────────────────── */
+      .avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: 3px solid;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      /* ─── OVERRIDES ──────────────────────────────────────────── */
+      .reveal p {
+        margin: 0;
+      }
+      .reveal section {
+        text-align: left;
+      }
+      .reveal section.center-slide {
+        text-align: center;
+      }
+
+      /* ─── ICON BULLET ────────────────────────────────────────── */
+      .icon-bullet {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      /* ─── PERCENT BIG NUMBER ─────────────────────────────────── */
+      .pct-big {
+        font-size: 2.8rem;
+        font-weight: 900;
+        font-family: monospace;
+        line-height: 1;
+      }
+
+      /* ─── CHANNEL TAG ────────────────────────────────────────── */
+      .channel-tag {
+        border: 2px solid #000;
+        border-radius: 8px;
+        padding: 10px 14px;
+        text-align: center;
+        font-family: monospace;
+        font-weight: 700;
+        font-size: 0.9rem;
+        background: #fff;
+        transition: all 0.18s ease;
+        cursor: default;
+      }
+      .channel-tag-featured {
+        background: #111;
+        color: #fff;
+        border-color: #111;
+        box-shadow: 3px 3px 0 var(--green);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── BRANDING FIJO ──────────────────────────────────────── -->
+    <div id="branding-overlay">
+      <img
+        src="https://avatars.githubusercontent.com/u/188985435?v=4"
+        alt="imyisusdev"
+      />
+      <span>imyisusdev</span>
+    </div>
+
+    <div class="reveal">
+      <div class="slides">
+        <!-- ═══════════════════════════════════════════════════
+             1. PORTADA
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#ffffff" class="center-slide">
+          <div
+            class="flex flex-col items-center justify-center gap-4 h-full"
+            style="min-height: 560px"
+          >
+            <!-- Avatar -->
+            <div
+              class="w-24 h-24 flex rounded-full overflow-hidden border-4 border-black shadow-[4px_4px_0_#16a34a] mb-2"
+            >
+              <img
+                src="https://avatars.githubusercontent.com/u/188985435?v=4"
+                alt="Yisus Dev"
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <div class="badge">CLASE 01</div>
+
+            <h1
+              class="text-6xl font-black text-center leading-tight"
+              style="letter-spacing: -2px"
+            >
+              Del Caos al<br />
+              <span class="bg-green-500 text-white px-3 rounded"
+                >Ahorro Activo</span
+              >
+            </h1>
+
+            <div class="w-12 h-1 bg-black rounded mt-2"></div>
+
+            <p class="text-gray-500 text-lg text-center mt-2 max-w-md">
+              El suelo firme que necesitás antes de entrar a la bolsa de
+              valores.
+            </p>
+
+            <div
+              class="flex items-center gap-2 border-2 border-black rounded-full px-5 py-2 mt-4 shadow-[3px_3px_0_#000]"
+            >
+              <i class="fab fa-youtube text-green-600 text-lg"></i>
+              <span class="font-mono font-bold text-sm">@imyisusdev</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             2. ¿QUIÉN QUERÉS SER? (Otar vs Yisus)
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#f9fafb">
+          <div class="flex flex-col gap-4 h-full" style="min-height: 560px">
+            <div class="text-center">
+              <div class="badge">ELIGE TU CAMINO</div>
+              <h2
+                class="text-5xl font-black mt-1 text-center"
+                style="letter-spacing: -2px"
+              >
+                ¿Quién querés ser?
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5 mt-2">
+              <!-- OTAR -->
+              <!-- UX: card-red/green are informational, no hover affordance needed -->
+              <div class="card card-red" style="border-radius: 12px">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="avatar border-red-500">
+                    <img
+                      src="/clase-1/avatar-otar.jpg"
+                      onerror="
+                        this.style.display = 'none';
+                        this.parentNode.innerHTML =
+                          '<div class=\'w-full h-full bg-red-100 flex items-center justify-center\'><i class=\'fas fa-user text-3xl text-red-400\'></i></div>';
+                      "
+                      alt="Otar"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3
+                      class="text-2xl font-black text-red-600 mb-0"
+                      style="letter-spacing: -0.5px"
+                    >
+                      OTAR
+                    </h3>
+                    <p class="text-sm text-gray-500 font-semibold">
+                      El ahorrador pasivo
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="border-t border-dashed border-red-200 pt-4 flex flex-col gap-3"
+                >
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-xmark text-red-500 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span>No hace presupuesto — "ya veré luego".</span>
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-xmark text-red-500 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span>Paga básicos en cuotas con interés.</span>
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-xmark text-red-500 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span>Gastos hormiga diarios (plata que vuela).</span>
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-xmark text-red-500 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span
+                      >Sin fondo de emergencia — se endeuda si algo pasa.</span
+                    >
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-xmark text-red-500 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span>Deja su dinero quieto bajo el colchón.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- YISUS -->
+              <div class="card card-green" style="border-radius: 12px">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="avatar border-green-600">
+                    <img
+                      src="https://avatars.githubusercontent.com/u/188985435?v=4"
+                      alt="Yisus"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3
+                      class="text-2xl font-black text-green-600 mb-0"
+                      style="letter-spacing: -0.5px"
+                    >
+                      YISUS
+                    </h3>
+                    <p class="text-sm text-gray-500 font-semibold">
+                      El inversor activo
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="border-t border-dashed border-green-200 pt-4 flex flex-col gap-3"
+                >
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span>Conoce sus ingresos y egresos al centavo.</span>
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span>Evita regalar plata en intereses de consumo.</span>
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span>Ahorro programado automático el día de cobro.</span>
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span
+                      >Fondo de emergencia listo — su airbag financiero.</span
+                    >
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i
+                    ><span>Hace crecer su excedente mes a mes.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             3. PRIMERO APAGÁ EL FUEGO
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#ffffff">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">EL ORDEN IMPORTA</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                Primero apagá el fuego
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                No tiene sentido decorar el living si la cocina se está
+                incendiando.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5">
+              <div class="card card-red">
+                <div class="text-3xl text-red-500 mb-3">
+                  <i class="fas fa-fire"></i>
+                </div>
+                <h4 class="text-lg font-black mb-2 text-red-700">
+                  ¿Cuadros en la pared?
+                </h4>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  Invertir en bolsa mientras seguís pagando deudas de consumo al
+                  <strong>40% anual</strong> es exactamente eso: intentar
+                  decorar mientras el fuego se expande.
+                </p>
+              </div>
+              <div class="card card-green">
+                <div class="text-3xl text-green-600 mb-3">
+                  <i class="fas fa-fire-extinguisher"></i>
+                </div>
+                <h4 class="text-lg font-black mb-2 text-green-700">
+                  Primero el extintor
+                </h4>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                  El orden correcto: <strong>1)</strong> Apagar el fuego (saldar
+                  deudas de consumo), <strong>2)</strong> Comprar el extintor
+                  (fondo de emergencia), <strong>3)</strong> Decorar (invertir).
+                </p>
+              </div>
+            </div>
+
+            <!-- Proceso -->
+            <div class="process-row">
+              <div class="process-step">
+                <i class="fas fa-receipt text-red-500 mr-2"></i>Saldar deudas
+              </div>
+              <span class="process-arrow">→</span>
+              <div class="process-step">
+                <i class="fas fa-shield-halved text-green-600 mr-2"></i>Fondo
+                emergencia
+              </div>
+              <span class="process-arrow">→</span>
+              <div class="process-step active">
+                <i class="fas fa-chart-line mr-2"></i>Invertir
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             4. ARREGLANDO LAS GOTERAS
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#f9fafb">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">LAS GOTERAS DEL PRESUPUESTO</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                Arreglando las goteras
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                Las deudas de consumo son como caminar con una mochila llena de
+                piedras todo el mes.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5">
+              <div class="card card-red">
+                <div
+                  class="text-xs font-bold font-mono text-red-500 uppercase mb-2 tracking-wider"
+                >
+                  <i class="fas fa-arrow-trend-down mr-1"></i> Lo que te cuesta
+                </div>
+                <h4 class="text-lg font-black mb-3">Deudas de consumo</h4>
+                <p class="text-sm text-gray-700 leading-relaxed !mb-3">
+                  Pagar compras básicas en cuotas en Perú te cuesta entre el
+                  <strong class="text-red-600">30% y 50% anual</strong>. Estás
+                  regalando dinero que podría trabajar para vos.
+                </p>
+                <div
+                  class="bg-red-100 border-2 border-red-400 rounded-lg p-3 text-center font-mono text-sm font-bold text-red-700"
+                >
+                  S/ 100 de cuota = S/ 40–50 de regalo al banco
+                </div>
+              </div>
+              <div class="card card-green" style="border-radius: 12px">
+                <div
+                  class="text-xs font-bold font-mono text-green-600 uppercase mb-2 tracking-wider"
+                >
+                  <i class="fas fa-arrow-trend-up mr-1"></i> Lo que podrías
+                  ganar
+                </div>
+                <h4 class="text-lg font-black mb-3">Bolsa de valores</h4>
+                <p class="text-sm text-gray-700 leading-relaxed !mb-3">
+                  El S&P 500 promedia un
+                  <strong class="text-green-600">~10% anual</strong> histórico.
+                  No tiene ningún sentido buscar ganar 10% mientras perdés 40%
+                  del otro lado.
+                </p>
+                <div
+                  class="bg-green-100 border-2 border-green-500 rounded-lg p-3 text-center font-mono text-sm font-bold text-green-700"
+                >
+                  Primero cerrá las fugas, luego llenás el balde.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             5. TU TORTA MENSUAL 50/30/20
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#ffffff">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">REGLA DEL 50/30/20</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                Tu Torta Mensual
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                Si no dividís las porciones <em>antes</em> de la fiesta, te
+                quedás con hambre a fin de mes.
+              </p>
+            </div>
+
+            <!-- UX: cards informativos sin hover — no son clickeables -->
+            <div class="grid grid-cols-3 gap-4 flex-1">
+              <div class="card flex flex-col items-center text-center gap-3">
+                <div class="pct-big text-black">50%</div>
+                <h4
+                  class="text-sm font-black uppercase border-b-2 border-black pb-2 w-full text-center tracking-wide"
+                >
+                  Gastos Fijos
+                </h4>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Alquiler, servicios, alimentación básica, salud. Todo lo
+                  indispensable para funcionar día a día.
+                </p>
+                <div class="text-xl text-gray-300 mt-auto">
+                  <i class="fas fa-house mr-1"></i
+                  ><i class="fas fa-bolt mr-1"></i
+                  ><i class="fas fa-utensils"></i>
+                </div>
+              </div>
+
+              <div class="card flex flex-col items-center text-center gap-3">
+                <div class="pct-big text-gray-400">30%</div>
+                <h4
+                  class="text-sm font-black uppercase border-b-2 border-gray-300 pb-2 w-full text-center tracking-wide text-gray-600"
+                >
+                  Gastos Variables
+                </h4>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                  Salidas, comida a domicilio, ropa, hobbies. Lo que hace tu
+                  vida agradable — con límite claro.
+                </p>
+                <div class="text-xl text-gray-300 mt-auto">
+                  <i class="fas fa-shirt mr-1"></i
+                  ><i class="fas fa-pizza-slice mr-1"></i
+                  ><i class="fas fa-film"></i>
+                </div>
+              </div>
+
+              <div
+                class="card card-green flex flex-col items-center text-center gap-3"
+                style="border-radius: 12px"
+              >
+                <div class="pct-big text-green-600">20%</div>
+                <h4
+                  class="text-sm font-black uppercase border-b-2 border-green-500 pb-2 w-full text-center tracking-wide text-green-700"
+                >
+                  Ahorro & Inversión
+                </h4>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  Este porcentaje <strong>no se negocia</strong>. Se desvía
+                  automáticamente el día que cobrás, antes de gastar nada.
+                </p>
+                <div class="text-xl text-green-400 mt-auto">
+                  <i class="fas fa-piggy-bank"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             6. EL AIRBAG DE TU ECONOMÍA
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#f9fafb">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">TU ESCUDO FINANCIERO</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                El airbag de tu economía
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                Nadie sale a la carretera <em>esperando</em> un choque, pero
+                todo auto lleva airbags. Tu fondo es exactamente eso.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5">
+              <!-- Cómo se calcula -->
+              <div class="card">
+                <h4
+                  class="text-sm font-black uppercase tracking-wider text-green-600 mb-3 flex items-center gap-2"
+                >
+                  <i class="fas fa-calculator"></i> ¿Cómo se calcula?
+                </h4>
+                <div
+                  class="bg-green-50 border-2 border-green-500 rounded-lg p-3 text-center font-mono font-bold text-green-800 text-base mb-4"
+                >
+                  Gastos fijos × (3 a 6 meses)
+                </div>
+                <div class="flex flex-col gap-3">
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i>
+                    <span class="text-sm"
+                      >Desempleo, salud, reparación urgente.
+                      <strong>Solo para eso.</strong></span
+                    >
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-xmark text-red-500 mt-0.5 flex-shrink-0"
+                    ></i>
+                    <span class="text-sm"
+                      >No es para ofertas de viaje ni antojo de fin de
+                      semana.</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lo que hace por vos -->
+              <div class="card">
+                <h4
+                  class="text-sm font-black uppercase tracking-wider text-green-600 mb-3 flex items-center gap-2"
+                >
+                  <i class="fas fa-car-burst"></i> Lo que hace por vos
+                </h4>
+                <div class="flex flex-col gap-4">
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="min-w-[36px] h-9 bg-black text-white flex items-center justify-center font-mono font-black text-sm shadow-[3px_3px_0_#16a34a] rounded"
+                    >
+                      A
+                    </div>
+                    <p class="text-sm leading-relaxed">
+                      <strong>Sin deudas de emergencia.</strong> No necesitás
+                      pedir prestado en el peor momento.
+                    </p>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="min-w-[36px] h-9 bg-black text-white flex items-center justify-center font-mono font-black text-sm shadow-[3px_3px_0_#16a34a] rounded"
+                    >
+                      B
+                    </div>
+                    <p class="text-sm leading-relaxed">
+                      <strong>Invertís tranquilo.</strong> Podés esperar que el
+                      mercado suba sin vender con pérdidas por necesidad.
+                    </p>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="min-w-[36px] h-9 bg-green-600 text-white flex items-center justify-center font-mono font-black text-sm shadow-[3px_3px_0_#000] rounded"
+                    >
+                      ✓
+                    </div>
+                    <p class="text-sm leading-relaxed">
+                      <strong>Paz mental.</strong> Sabés que tenés un colchón
+                      real. No vivís con miedo al imprevisto.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             7. EL BALDE PINCHADO
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#ffffff">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">EL COSTO DE NO HACER NADA</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                El balde pinchado
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                Guardar dinero quieto <em>es</em> perder dinero. S/ 10,000 en 5
+                años:
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5 flex-1">
+              <!-- Gráfico -->
+              <div class="card flex flex-col items-center justify-center">
+                <div class="bar-chart-wrap mb-3">
+                  <div class="bar-col">
+                    <div class="bar bg-red-300" style="height: 120px">
+                      <span class="bar-val text-red-600">S/ 7,339</span>
+                    </div>
+                    <span class="bar-label text-gray-600">Bajo el colchón</span>
+                  </div>
+                  <div class="bar-col">
+                    <div class="bar bg-green-400" style="height: 200px">
+                      <span class="bar-val text-green-700">S/ 13,382</span>
+                    </div>
+                    <span class="bar-label text-gray-600">Cuenta TREA 6%</span>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-400 font-mono text-center mt-2">
+                  *Colchón ajustado por inflación (~6% anual). TREA muestra
+                  valor nominal.
+                </p>
+              </div>
+
+              <!-- Explicaciones -->
+              <div class="flex flex-col gap-4 justify-center">
+                <div class="card card-red" style="border-radius: 12px">
+                  <h4
+                    class="text-base font-black text-red-600 mb-2 flex items-center gap-2"
+                  >
+                    <i class="fas fa-water"></i> El balde gotea
+                  </h4>
+                  <p class="text-sm text-gray-700 leading-relaxed">
+                    La inflación es el goteo constante. S/ 10,000 quietos
+                    durante 5 años valen solo <strong>S/ 7,339</strong> en poder
+                    de compra real.
+                  </p>
+                </div>
+                <div class="card card-green" style="border-radius: 12px">
+                  <h4
+                    class="text-base font-black text-green-700 mb-2 flex items-center gap-2"
+                  >
+                    <i class="fas fa-piggy-bank"></i> El ahorro inteligente
+                  </h4>
+                  <p class="text-sm text-gray-700 leading-relaxed">
+                    Una cuenta con TREA 6% hace crecer tus S/ 10,000 a
+                    <strong>S/ 13,382</strong>. La diferencia de
+                    <strong>S/ 6,043</strong> que ganás o perdés solo por elegir
+                    dónde guardar tu plata.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             8. CUENTAS TREA EN PERÚ
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#f9fafb">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">DÓNDE GUARDAR EL FONDO</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                Cuentas TREA en Perú
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                Seguro, líquido y rentable. Los tres requisitos del fondo de
+                emergencia.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5">
+              <!-- Seguridad -->
+              <div class="card">
+                <h4
+                  class="text-sm font-black uppercase tracking-wider text-green-600 mb-3 flex items-center gap-2"
+                >
+                  <i class="fas fa-shield-halved"></i> Seguridad regulada
+                </h4>
+                <div class="flex flex-col gap-3 mb-4">
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i>
+                    <span class="text-sm"
+                      ><strong>FSD:</strong> Protege hasta aprox. S/ 120,000 en
+                      bancos y financieras reguladas ante quiebras.</span
+                    >
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i>
+                    <span class="text-sm"
+                      ><strong>SBS:</strong> Evitá cooperativas informales. Solo
+                      entidades validadas por la Superintendencia.</span
+                    >
+                  </div>
+                </div>
+                <!-- UX: btn class handles consistent hover states for ALL links -->
+                <div class="flex gap-3">
+                  <a
+                    href="https://www.sbs.gob.pe"
+                    target="_blank"
+                    class="btn btn-outline"
+                  >
+                    <i class="fas fa-arrow-up-right-from-square"></i> Portal SBS
+                  </a>
+                  <a
+                    href="https://www.fsd.org.pe"
+                    target="_blank"
+                    class="btn btn-outline"
+                  >
+                    <i class="fas fa-shield-halved"></i> FSD Perú
+                  </a>
+                </div>
+              </div>
+
+              <!-- Qué buscar -->
+              <div class="card card-green" style="border-radius: 12px">
+                <h4
+                  class="text-sm font-black uppercase tracking-wider text-green-700 mb-3 flex items-center gap-2"
+                >
+                  <i class="fas fa-list-check"></i> Qué buscar
+                </h4>
+                <div class="flex flex-col gap-3 mb-4">
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i>
+                    <span class="text-sm"
+                      ><strong>TREA alta:</strong> Financiera Efectiva,
+                      Compartamos Financiera, entre otras del mercado
+                      peruano.</span
+                    >
+                  </div>
+                  <div class="icon-bullet">
+                    <i
+                      class="fas fa-circle-check text-green-600 mt-0.5 flex-shrink-0"
+                    ></i>
+                    <span class="text-sm"
+                      ><strong>Liquidez inmediata:</strong> No en plazos fijos.
+                      Necesitás poder retirar en cualquier momento.</span
+                    >
+                  </div>
+                </div>
+                <a
+                  href="https://comparabien.com.pe"
+                  target="_blank"
+                  class="btn btn-green"
+                >
+                  <i class="fas fa-magnifying-glass"></i> Comparar tasas en
+                  Comparabien
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             9. ECOSISTEMA & CREADORES
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#ffffff">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge">TU KIT DE ARRANQUE</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                Ecosistema & Creadores
+              </h2>
+              <p class="text-gray-500 text-base mt-1">
+                Apps para registrar tus gastos y canales peruanos para
+                mantenerte actualizado.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5">
+              <!-- App -->
+              <div class="card">
+                <h4
+                  class="text-sm font-black uppercase tracking-wider mb-3 flex items-center gap-2"
+                >
+                  <i class="fas fa-mobile-screen text-green-600"></i> App de
+                  registro
+                </h4>
+                <!-- UX: este bloque es información, no acción — sin hover -->
+                <div
+                  class="border-2 border-black rounded-xl p-4 flex items-center gap-4 mb-3"
+                >
+                  <div
+                    class="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="fas fa-wallet text-white text-xl"></i>
+                  </div>
+                  <div>
+                    <p class="font-black text-base">MONEY MANAGER</p>
+                    <p class="text-xs text-gray-500 leading-snug">
+                      Registrá cada gasto al instante. Ver tus reportes diarios
+                      es lo que te mantiene en el camino correcto.
+                    </p>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-400 italic text-center">
+                  El registro manual diario es la única forma de ver exactamente
+                  a dónde va tu plata cada mes.
+                </p>
+              </div>
+
+              <!-- Creadores -->
+              <div class="card card-green" style="border-radius: 12px">
+                <h4
+                  class="text-sm font-black uppercase tracking-wider text-green-700 mb-1 flex items-center gap-2"
+                >
+                  <i class="fab fa-youtube text-red-600"></i> Creadores
+                  recomendados
+                </h4>
+                <p class="text-xs text-gray-500 !mb-3">
+                  Las tasas TREA cambian mes a mes. Seguí estos canales para
+                  estar al día:
+                </p>
+                <!-- UX: channel-tag sin hover — son refs informativas, no links -->
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="channel-tag">@karicats</div>
+                  <div class="channel-tag">@jorgehandre</div>
+                  <div class="channel-tag">@solesycentavos</div>
+                  <div class="channel-tag channel-tag-featured">
+                    @imyisusdev ✓
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             10. EL DESAFÍO DE LA SEMANA
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#f9fafb">
+          <div class="flex flex-col gap-5 h-full" style="min-height: 560px">
+            <div>
+              <div class="badge badge-green">TU TAREA ESTA SEMANA</div>
+              <h2 class="text-5xl font-black mt-1" style="letter-spacing: -2px">
+                El desafío de la semana
+              </h2>
+            </div>
+
+            <div class="card card-green" style="border-radius: 16px">
+              <div class="flex flex-col gap-8 h-full justify-center">
+                <div class="flex items-center gap-4">
+                  <div class="step-num">1</div>
+                  <div>
+                    <p class="font-bold text-base leading-snug">
+                      <strong>Descargá Money Manager</strong> y registrá cada
+                      gasto al instante durante 7 días seguidos, sin excepción.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="h-px bg-green-200"></div>
+
+                <div class="flex items-center gap-4">
+                  <div class="step-num">2</div>∂
+                  <div>
+                    <p class="font-bold text-base leading-snug">
+                      <strong>Calculá tu fondo de emergencia:</strong>
+                      multiplicá tus gastos fijos mensuales por 3 (mínimo) o por
+                      6 (ideal).
+                    </p>
+                  </div>
+                </div>
+
+                <div class="h-px bg-green-200"></div>
+
+                <div class="flex items-center gap-4">
+                  <div class="step-num">3</div>
+                  <div>
+                    <p class="font-bold text-base leading-snug">
+                      <strong>Entrá a Comparabien</strong> e identificá las 3
+                      mejores cuentas TREA reguladas por la SBS disponibles hoy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════
+             11. CIERRE / ¿PREGUNTAS?
+        ════════════════════════════════════════════════════════ -->
+        <section data-background-color="#0a0a0a" class="center-slide">
+          <div
+            class="flex flex-col items-center justify-center gap-6 h-full"
+            style="min-height: 560px"
+          >
+            <!-- Decoración de fondo -->
+            <div
+              class="absolute top-0 right-0 w-48 h-48 bg-green-900 rounded-full opacity-30 -translate-y-1/3 translate-x-1/3 blur-2xl"
+            ></div>
+            <div
+              class="absolute bottom-0 left-0 w-56 h-56 bg-gray-800 rounded-full opacity-40 translate-y-1/3 -translate-x-1/3 blur-2xl"
+            ></div>
+
+            <div class="text-6xl">💬</div>
+
+            <h2
+              class="text-7xl font-black text-white text-center"
+              style="letter-spacing: -3px"
+            >
+              ¿Preguntas?
+            </h2>
+
+            <div class="w-16 h-1 bg-green-500 rounded"></div>
+
+            <div class="text-center">
+              <p class="text-gray-400 text-lg mb-2">
+                La próxima clase entramos al mercado:
+              </p>
+              <p class="text-green-400 font-black text-2xl">
+                El Menú de Inversiones
+              </p>
+              <p class="text-gray-600 text-sm mt-1">Fondos · Acciones · ETFs</p>
+            </div>
+
+            <div
+              class="flex items-center gap-3 border-2 border-white rounded-full px-5 py-2 mt-2"
+            >
+              <img
+                src="https://avatars.githubusercontent.com/u/188985435?v=4"
+                class="w-8 h-8 rounded-full border border-white"
+                alt="Yisus Dev"
+              />
+              <span class="font-mono font-bold text-white text-sm"
+                >@imyisusdev</span
+              >
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Scripts de Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        controls: true,
+        progress: true,
+        center: true,
+        transition: 'fade',
+        backgroundTransition: 'fade',
+        width: 1280,
+        height: 720,
+      });
+    </script>
+  </body>
+</html>
